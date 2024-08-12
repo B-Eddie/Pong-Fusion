@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI; // Add this namespace for the Text component
 
 public class Ball : MonoBehaviour
 {
     public float speed = 10f;
     private Rigidbody2D rb;
+    public Text Balle; // Make sure this is assigned in the Inspector
+    private List<int> score_num = new List<int> { 0, 0 };
 
     void Start()
     {
@@ -24,10 +26,35 @@ public class Ball : MonoBehaviour
         rb.velocity = direction * speed;
     }
 
+    void Update()
+    {
+        // Update the text component with the current score
+        if (Balle != null)
+        {
+            Balle.text = string.Join(":", score_num);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Increase speed slightly when the ball collides with something
-        rb.velocity *= 1.05f;
+        Debug.Log(collision.gameObject.name);
+
+        // Reflect the ball's velocity based on the collision normal
+        Vector2 newVelocity = Vector2.Reflect(rb.velocity, collision.contacts[0].normal);
+
+        // Maintain the original speed after reflection
+        rb.velocity = newVelocity.normalized * speed;
+
+        if (collision.gameObject.name == "wall1")
+        {
+            score_num[0]++;
+            ResetBall();
+        }
+        else if (collision.gameObject.name == "wall3")
+        {
+            score_num[1]++;
+            ResetBall();
+        }
     }
 
     public void ResetBall()
