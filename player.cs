@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public float moveSpeed = 0.05f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,14 +18,14 @@ public class Player : MonoBehaviour
         {
             if (transform.position[1] < 3.7)
             {
-                transform.position += new Vector3(0, 0.005f, 0);
+                transform.position += new Vector3(0, moveSpeed, 0);
             }
         }
         else if (Input.GetKey(KeyCode.S))
         {
             if (transform.position[1] > -3.7)
             {
-                transform.position += new Vector3(0, -0.005f, 0);
+                transform.position += new Vector3(0, -moveSpeed, 0);
             }
         }
         else if (Input.touchCount > 0)
@@ -35,11 +36,11 @@ public class Player : MonoBehaviour
 
             if (touchPosition.x < screenWidth / 2)
             {
-                transform.position += new Vector3(0, 0.005f, 0);
+                transform.position += new Vector3(0, moveSpeed, 0);
             }
             else
             {
-                transform.position += new Vector3(0, -0.005f, 0);
+                transform.position += new Vector3(0, -moveSpeed, 0);
             }
         }
     }
