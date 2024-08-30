@@ -5,3 +5,5 @@ My first unity game!! It is currently just pong, but I'm planning to add a twist
 ![image](s.png)
 
 Demo video in mov.mov
+
+Download it [here!](https://murder-of-codes.itch.io/pong-fusion)
